@@ -20,11 +20,7 @@ class Nexus::Repository
   end
   
   def download_artifact(artifact)
-    resp = RestClient.get(artifact.uri)
-    tempfile = Tempfile.new('rnexus')
-    tempfile.write(resp)
-    tempfile.flush
-    tempfile
+    RestClient.get(artifact.uri)
   end
   
   private

@@ -1,6 +1,5 @@
 require 'rubygems'
 require 'test/unit'
-require 'mocha'
 require 'fakeweb'
 
 FakeWeb.allow_net_connect = false

@@ -73,8 +73,7 @@ class RepositoryTest < Test::Unit::TestCase
 
     file = @repository.download_artifact(artifact)
 
-    assert(File.exists?(file))
-    assert_equal('file content', File.read(file.path))
+    assert_equal('file content', file)
   end
   
   def assert_artifacts(artifacts)
