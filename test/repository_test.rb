@@ -23,22 +23,18 @@ class RepositoryTest < Test::Unit::TestCase
   eos
   
   def setup
-    @repository = Nexus::Repository.new("http://localhost/nexus")
+    @repository = Nexus::Repository.new("http://localhost/nexus", "user", "pass")
   end
   
   def test_find_artifacts_using_all_options
     expected_url = "http://localhost/nexus/service/local/data_index/repo_groups/public?a=artifact&g=group&p=war"
-  
     FakeWeb.register_uri(:get, expected_url, :body => JSON)
-    
     assert_artifacts @repository.find_artifacts(:group => 'group', :name => 'artifact', :type => 'war')
   end
   
   def test_find_artifacts_using_artifact_id_only
     expected_url = "http://localhost/nexus/service/local/data_index/repo_groups/public?a=artifact"
-
     FakeWeb.register_uri(:get, expected_url, :body => JSON)
-    
     assert_artifacts @repository.find_artifacts(:name => 'artifact')    
   end
   
@@ -66,13 +62,17 @@ class RepositoryTest < Test::Unit::TestCase
     assert_equal("must pass at least one argument (type, name, group)", exception.message)
   end
   
-  def test_download_artifact
+  def test_delete
+    expected_url = "http://user:pass@localhost/nexus/service/local/repositories/repo/content/org/group/artifact/version/"
+    artifact = Nexus::Artifact.new('groupId' => 'org.group', 'artifactId' => 'artifact', 'version' => 'version', 'repoId' => 'repo')
+    FakeWeb.register_uri(:delete, expected_url, :status => 200)
+    assert_equal(200, @repository.delete(artifact))
+  end
+  
+  def test_download
     artifact = Nexus::Artifact.new('resourceURI' => 'http://nexus/artifact')
-    
     FakeWeb.register_uri(:get, "http://nexus/artifact", :body => 'file content')
-
-    file = @repository.download_artifact(artifact)
-
+    file = @repository.download(artifact)
     assert_equal('file content', file)
   end
   

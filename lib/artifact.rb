@@ -1,5 +1,5 @@
 class Nexus::Artifact
-  attr_accessor :group, :name, :version, :type, :uri
+  attr_accessor :group, :name, :version, :type, :uri, :repo
   
   def initialize(parameters)
     self.group = parameters['groupId']
@@ -7,5 +7,6 @@ class Nexus::Artifact
     self.version = parameters['version']
     self.type = parameters['packaging']
     self.uri = parameters['resourceURI']
+    self.repo = parameters['repoId']
   end
 end

@@ -9,8 +9,10 @@ class Nexus::Repository
     :type => :p
   }
   
-  def initialize(baseuri)
+  def initialize(baseuri, username = nil, password = nil)
     @baseuri = baseuri
+    @username = username
+    @password = password
   end
   
   def find_artifacts(args)
@@ -19,8 +21,13 @@ class Nexus::Repository
     Crack::JSON.parse(response)['data'].map {|data| Nexus::Artifact.new(data)}
   end
   
-  def download_artifact(artifact)
+  def download(artifact)
     RestClient.get(artifact.uri)
+  end
+  
+  def delete(artifact)
+    url = "#{@baseuri}/service/local/repositories/#{artifact.repo}/content/#{artifact.group.gsub(/\./, '/')}/#{artifact.name}/#{artifact.version}/"
+    RestClient::Resource.new(url, :user => @username, :password => @password).delete.code
   end
   
   private
@@ -47,3 +54,4 @@ class Nexus::Repository
     "(#{NEXUS_PARAMETERS.keys.join(', ')})"
   end
 end
+
