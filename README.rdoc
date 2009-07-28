@@ -2,15 +2,15 @@
 
 A ruby wrapper to perform actions against the Nexus maven repository manager
 
-== Synopsis
+== Install
+
+  sudo gem install rnexus
+
+== Usage
 
   repo = Nexus::Repository.new("http://path/to/nexus")
   artifacts = repo.find_artifacts(:group => 'org.mockito', :name => 'mockito', :type => 'jar')
   jar = repo.download_artifact(artifacts.first)
-
-== Install
-
-  sudo gem install rnexus
 
 == Copyright
 
