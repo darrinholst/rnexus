@@ -51,7 +51,7 @@ class RepositoryTest < Test::Unit::TestCase
       @repository.find_artifacts(:a => 'foo', :b => 'bar')
     end
 
-    assert_equal("invalid argument passed, valid arguments are (type, name, group)", exception.message)
+    assert_equal("invalid argument passed, valid arguments are (group, name, type)", exception.message)
   end
 
   def test_find_artifacts_when_empty_arguments_passed
@@ -59,7 +59,7 @@ class RepositoryTest < Test::Unit::TestCase
       @repository.find_artifacts({})
     end
 
-    assert_equal("must pass at least one argument (type, name, group)", exception.message)
+    assert_equal("must pass at least one argument (group, name, type)", exception.message)
   end
 
   def test_delete

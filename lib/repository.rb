@@ -51,7 +51,7 @@ class Nexus::Repository
   end
 
   def nexus_parameters_to_s
-    "(#{NEXUS_PARAMETERS.keys.join(', ')})"
+    "(#{NEXUS_PARAMETERS.keys.map{|k| k.to_s}.sort.join(', ')})"
   end
 end
 
