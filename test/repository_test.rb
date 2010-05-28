@@ -73,7 +73,7 @@ class RepositoryTest < Test::Unit::TestCase
     artifact = Nexus::Artifact.new('resourceURI' => 'http://nexus/artifact')
     FakeWeb.register_uri(:get, "http://nexus/artifact", :body => 'file content')
     file = @repository.download(artifact)
-    assert_equal('file content', file.body)
+    assert_equal('file content', file)
   end
 
   def assert_artifacts(artifacts)

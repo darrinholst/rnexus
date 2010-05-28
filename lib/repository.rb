@@ -22,7 +22,7 @@ class Nexus::Repository
   end
 
   def download(artifact)
-    RestClient.get(artifact.uri)
+    RestClient.get(artifact.uri).body
   end
 
   def delete(artifact)

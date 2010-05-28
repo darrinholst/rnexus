@@ -10,7 +10,7 @@ begin
     gem.homepage = "http://github.com/darrinholst/rnexus"
     gem.authors = ["Darrin Holst"]
     gem.rubyforge_project = "rnexus"
-    gem.add_dependency("rest-client", ">= 1.0.3")
+    gem.add_dependency("rest-client", ">= 1.4.0")
     gem.add_dependency("crack", ">= 0.1.3")
     # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
   end
