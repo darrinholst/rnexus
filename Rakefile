@@ -9,8 +9,8 @@ begin
     gem.email = "darrinholst@gmail.com"
     gem.homepage = "http://github.com/darrinholst/rnexus"
     gem.authors = ["Darrin Holst"]
-    gem.add_dependency("rest-client", ">= 1.4.0")
-    gem.add_dependency("crack", ">= 0.1.3")
+    gem.add_dependency("rest-client", "~> 1.6.1")
+    gem.add_dependency("crack", "~> 0.1.3")
   end
 
   Jeweler::GemcutterTasks.new
