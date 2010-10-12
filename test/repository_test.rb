@@ -69,6 +69,20 @@ class RepositoryTest < Test::Unit::TestCase
     assert_equal(200, @repository.delete(artifact))
   end
 
+  def test_put
+    expected_url = "http://user:pass@localhost/nexus/service/local/repositories/repo/content/org/group/artifact/version/artifact.war"
+    artifact = Nexus::Artifact.new('groupId' => 'org.group', 'artifactId' => 'artifact', 'version' => 'version', 'repoId' => 'repo', 'packaging' => 'war')
+    FakeWeb.register_uri(:put, expected_url, :status => 200)
+    assert_equal(200, @repository.put(artifact, Tempfile.new('some.war')))
+  end
+  
+  def test_put_with_classifier
+    expected_url = "http://user:pass@localhost/nexus/service/local/repositories/repo/content/org/group/artifact/version/artifact-classifier.war"
+    artifact = Nexus::Artifact.new('groupId' => 'org.group', 'artifactId' => 'artifact', 'version' => 'version', 'repoId' => 'repo', 'packaging' => 'war', 'classifier' => 'classifier')
+    FakeWeb.register_uri(:put, expected_url, :status => 200)
+    assert_equal(200, @repository.put(artifact, Tempfile.new('some.war')))
+  end
+
   def test_download
     artifact = Nexus::Artifact.new('resourceURI' => 'http://nexus/artifact')
     FakeWeb.register_uri(:get, "http://nexus/artifact", :body => 'file content')

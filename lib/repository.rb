@@ -30,6 +30,19 @@ class Nexus::Repository
     RestClient::Resource.new(url, :user => @username, :password => @password).delete.code
   end
 
+  def put(artifact, file)
+    filename = artifact.name
+
+    if(artifact.classifier)
+      filename = filename + "-" + artifact.classifier
+    end
+
+    filename = filename + "." + artifact.type
+
+    url = "#{@baseuri}/service/local/repositories/#{artifact.repo}/content/#{artifact.group.gsub(/\./, '/')}/#{artifact.name}/#{artifact.version}/#{filename}"
+    RestClient::Resource.new(url, :user => @username, :password => @password).put(:file => file).code
+  end
+
   private
 
   def build_query_parameters_from(args)

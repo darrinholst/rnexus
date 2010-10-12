@@ -16,5 +16,5 @@ class ArtifactTest < Test::Unit::TestCase
     assert_equal('war', artifact.type)
     assert_equal('uri', artifact.uri)
     assert_equal('repo', artifact.repo)
-  end
+  end  
 end
