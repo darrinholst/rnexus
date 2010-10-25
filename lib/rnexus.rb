@@ -1,5 +1,5 @@
 module Nexus
 end
 
-require 'artifact'
-require 'repository'
+require 'nexus/artifact'
+require 'nexus/repository'
