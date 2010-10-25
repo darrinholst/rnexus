@@ -11,6 +11,9 @@ begin
     gem.authors = ["Darrin Holst"]
     gem.add_dependency("rest-client", "~> 1.6.1")
     gem.add_dependency("crack", "~> 0.1.3")
+    gem.add_development_dependency("fakeweb")
+    gem.add_development_dependency("jeweler")
+    gem.add_development_dependency("rake")
   end
 
   Jeweler::GemcutterTasks.new
