@@ -5,3 +5,4 @@ rdoc
 pkg
 .bundle
 Gemfile.lock
+*.gem
